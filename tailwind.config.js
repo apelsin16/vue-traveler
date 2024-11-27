@@ -6,6 +6,7 @@ export default {
       colors: {
         primary: '#F3743D',
         grey: '#939393',
+        overlay: 'rgba(0, 0, 0, 0.3)',
       },
     },
   },
