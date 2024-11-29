@@ -99,7 +99,7 @@ const handleAddPlace = async (formData, resetForm) => {
       <LogoutButton class="mt-10" />
       <CreateNewPlaceModal
         :is-open="isOpen"
-        :is-loading="isLoading"
+        :is-loading="isLoadingPlaces"
         :has-error="error"
         @close="closeModal"
         @submit="handleAddPlace"
