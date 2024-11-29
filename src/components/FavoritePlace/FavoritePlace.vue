@@ -2,28 +2,54 @@
 import FavoritePlaceIconButton from './FavoritePlaceIconButton.vue'
 import DeleteIcon from './DeleteIcon.vue'
 import EditIcon from './EditIcon.vue'
+import fallbackImage from '../../assets/img/default-image.png'
+
+const props = defineProps({
+  title: {
+    required: true,
+    type: String,
+  },
+  description: {
+    required: true,
+    type: String,
+  },
+  img: String,
+  isActive: {
+    required: true,
+    type: Boolean,
+  },
+})
+
+const emit = defineEmits(['edit', 'delete'])
 </script>
 
 <template>
   <section class="text-grey mb-6 last:mb-0">
     <div class="flex gap-4">
-      <img class="w-[76px] h-[76px] shrink-0" src="" alt="" />
-      <div>
+      <img
+        class="w-[76px] h-[76px] shrink-0 rounded-md"
+        :src="props.img || fallbackImage"
+        :alt="props.description"
+      />
+      <div class="w-full">
         <div class="flex justify-between items-center mb-2">
-          <h2 class="font-bold text-sm text-[#2c2c2c]"></h2>
+          <h2 class="font-bold text-sm text-[#2c2c2c]">{{ props.title }}</h2>
           <div class="flex gap-2">
-            <FavoritePlaceIconButton>
+            <FavoritePlaceIconButton @click="emit('edit', props.id)">
               <EditIcon />
             </FavoritePlaceIconButton>
-            <FavoritePlaceIconButton>
+            <FavoritePlaceIconButton @click.stop="emit('delete')">
               <DeleteIcon />
             </FavoritePlaceIconButton>
           </div>
         </div>
-        <p class="text-xs line-clamp-3"></p>
+        <p class="text-xs line-clamp-3">{{ props.description }}</p>
       </div>
     </div>
 
-    <div class="h-[1px] w-full bg-[#ececec] mt-4"></div>
+    <div
+      class="h-[1px] w-full mt-4"
+      :class="{ 'bg-primary': props.isActive, 'bg-[#ececec]': !props.isActive }"
+    ></div>
   </section>
 </template>

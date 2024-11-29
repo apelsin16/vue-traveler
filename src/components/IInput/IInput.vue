@@ -31,6 +31,7 @@ const componentName = computed(() => (isTextarea.value ? 'textarea' : 'input'))
       <span class="block text-xs px-3 mb-2">{{ props.label }}</span>
       <component
         :is="componentName"
+        :value="modelValue"
         rows="3"
         :class="inputStyles"
         @input="emit('update:modelValue', $event.target.value)"
